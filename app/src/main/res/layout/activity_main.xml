@@ -76,9 +76,10 @@
                             android:textColor="@color/text_secondary"
                             android:textSize="@dimen/text_size_caption"/>
                         <TextView
+                            android:id="@+id/tvSalesValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="₹12,450"
+                            android:text="₹0"
                             android:textColor="@color/success"
                             android:textSize="@dimen/text_size_h2"
                             android:textStyle="bold"
@@ -105,9 +106,10 @@
                             android:textColor="@color/text_secondary"
                             android:textSize="@dimen/text_size_caption"/>
                         <TextView
+                            android:id="@+id/tvOrdersValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="24"
+                            android:text="0"
                             android:textColor="@color/accent"
                             android:textSize="@dimen/text_size_h2"
                             android:textStyle="bold"
@@ -144,9 +146,10 @@
                             android:textColor="@color/text_secondary"
                             android:textSize="@dimen/text_size_caption"/>
                         <TextView
+                            android:id="@+id/tvProductsCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="156"
+                            android:text="0"
                             android:textColor="@color/text_main"
                             android:textSize="@dimen/text_size_h2"
                             android:textStyle="bold"
@@ -173,9 +176,10 @@
                             android:textColor="@color/text_secondary"
                             android:textSize="@dimen/text_size_caption"/>
                         <TextView
+                            android:id="@+id/tvLowStockCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="8 Items"
+                            android:text="0 Items"
                             android:textColor="@color/error"
                             android:textSize="@dimen/text_size_h2"
                             android:textStyle="bold"
