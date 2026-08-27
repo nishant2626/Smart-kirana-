@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">ApexplanetTask1</string>
+    <string name="app_name">Smart Kirana</string>
+    <string name="welcome_manager">Welcome back, Store Manager!</string>
+    <string name="dashboard_overview">Overview</string>
+    <string name="quick_actions">Quick Actions</string>
 </resources>

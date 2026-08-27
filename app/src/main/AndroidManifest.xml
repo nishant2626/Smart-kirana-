@@ -25,12 +25,17 @@
         <activity
             android:name=".ProductsActivity"
             android:exported="false"
-            android:label="Products" />
+            android:label="Inventory" />
             
         <activity
             android:name=".AboutActivity"
             android:exported="false"
-            android:label="About Store" />
+            android:label="About Smart Kirana" />
+
+        <activity
+            android:name=".AddProductActivity"
+            android:exported="false"
+            android:label="Add New Product" />
             
     </application>
 

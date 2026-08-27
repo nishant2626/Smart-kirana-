@@ -1,47 +1,42 @@
-# ApexPlanet-Task-1-Android: My Kirana Store
+# Smart Kirana — ApexPlanet Task 2
 
 ## Project Description
-"My Kirana Store" is a simple Android application developed as part of **Task 1 of the 45-Day Android App Development Internship at ApexPlanet Software Pvt. Ltd.** The app serves as a basic digital storefront for a local grocery shop, demonstrating fundamental Android development concepts using Java.
+**Smart Kirana** is a premium business management application designed for local Indian shopkeepers. It provides a simple, modern, and professional interface to manage inventory, track sales, and oversee store operations.
 
 ## Internship Details
 - **Company:** ApexPlanet Software Pvt. Ltd.
-- **Task:** Task 1 — Android Development Fundamentals
+- **Task:** Task 2 — UI/UX Design and Implementation
+
+## UI/UX Improvements (Task 2)
+- **Modern Dashboard:** A clean overview screen showing key business metrics (Sales, Orders, Stock) using high-contrast Material 3 cards.
+- **Visual Design System:** Implemented a consistent palette of deep slate and modern blue, with standardized spacing and typography.
+- **Responsive Layouts:** Utilized `ConstraintLayout`, `GridLayout`, and `NestedScrollView` to ensure the app works across all screen sizes.
+- **Optimized Navigation:** Intuitive flow between Home, Inventory, and Product Management using a Floating Action Button (FAB) and clear button hierarchy.
+- **Inventory Management:** A scan-friendly product list with status indicators (e.g., Low Stock alerts).
+- **Material 3 Components:** Integrated `MaterialButton`, `TextInputLayout` with floating labels, and `MaterialCardView` for a premium feel.
 
 ## Technologies Used
 - **Language:** Java
-- **UI Design:** XML (Layouts)
-- **Build Tool:** Gradle
-- **IDE:** Android Studio
+- **Design:** XML, Material Design 3
+- **Tools:** Android Studio, Gradle
 
 ## Features
-- **Home Screen:** A welcoming landing page with navigation options.
-- **Product List:** Displays a variety of grocery items with their prices.
-- **About Store:** Provides details about the store, including contact information.
-- **Dynamic Welcome:** Uses a Fragment to display a welcome message on the Home Screen.
+- **Dashboard Overview:** Real-time metrics visualization.
+- **Inventory List:** Searchable product view with category and stock status.
+- **Add Product Form:** Professional input validation-ready form.
+- **About Section:** Polished branding and developer information.
 
-## Android Concepts Demonstrated
-- **Activities:** Multiple screens (Main, Products, About) managed via Activity classes.
-- **Intents:** Navigation between different activities.
-- **Fragments:** Modular UI component (`WelcomeFragment`) used within the MainActivity.
-- **Layouts:** Use of `ConstraintLayout` and `LinearLayout` for responsive design.
-- **UI Components:** `TextView`, `Button`, `ImageView`, and `ScrollView`.
-- **Event Handling:** Button click listeners to trigger navigation.
-
-## How to Run the Project
+## How to Run
 1. Open the project in **Android Studio**.
-2. Ensure you have the **Android SDK** and an **Emulator** (or physical device) configured.
-3. Sync the project with Gradle files.
-4. Click the **'Run'** button (green play icon) in Android Studio.
-5. The app will launch on your device/emulator.
+2. Sync the project with Gradle.
+3. Run on an emulator or physical device.
+4. Use the Dashboard buttons to navigate through the app.
 
-## Project Structure
-- `MainActivity.java`: The entry point of the app, hosting the Welcome Fragment and navigation buttons.
-- `ProductsActivity.java`: Displays the list of products.
-- `AboutActivity.java`: Displays store information.
-- `WelcomeFragment.java`: A simple fragment displayed on the home screen.
-- `res/layout/`: Contains XML layout files for all activities and fragments.
-
-## Future Improvements
-- Implement a `RecyclerView` for a more dynamic product list.
-- Add a "Cart" functionality to simulate shopping.
-- Integrate a database (SQLite/Room) to store product data locally.
+## Testing Checklist
+- [x] Home dashboard displays overview cards.
+- [x] "Manage Inventory" button opens the product list.
+- [x] "Add New Product" FAB/Button opens the form.
+- [x] Form validation (toast message) works on save.
+- [x] About screen displays professional branding.
+- [x] Toolbar back buttons function correctly on all screens.
+- [x] Layout remains responsive on different screen densities.

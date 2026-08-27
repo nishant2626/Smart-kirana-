@@ -3,9 +3,9 @@ package com.example.apexplanettask1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,24 +21,32 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
         // Initialize Buttons
-        Button btnViewProducts = findViewById(R.id.btnViewProducts);
-        Button btnAboutStore = findViewById(R.id.btnAboutStore);
+        MaterialButton btnAddProduct = findViewById(R.id.btnAddProduct);
+        MaterialButton btnViewProducts = findViewById(R.id.btnViewProducts);
+        MaterialButton btnAboutStore = findViewById(R.id.btnAboutStore);
 
-        // Handle View Products button click
+        // Quick Action: Add Product
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Quick Action: View Products
         btnViewProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to ProductsActivity using Intent
                 Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
                 startActivity(intent);
             }
         });
 
-        // Handle About Store button click
+        // About Store
         btnAboutStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to AboutActivity using Intent
                 Intent intent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(intent);
             }
