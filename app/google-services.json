@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "215741305891",
+    "firebase_url": "https://smart-kirana-4eb7c-default-rtdb.firebaseio.com",
+    "project_id": "smart-kirana-4eb7c",
+    "storage_bucket": "smart-kirana-4eb7c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215741305891:android:6236572d1d4505d0514d96",
+        "android_client_info": {
+          "package_name": "com.example.apexplanettask1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215741305891-bv4s47ppntr76m7u5h3tmj88751vcvvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB64Y69-b4rU1O4YI8NHIFdvOQxBqVBuqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215741305891-bv4s47ppntr76m7u5h3tmj88751vcvvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
