@@ -3,4 +3,29 @@
     <string name="welcome_manager">Welcome back, Store Manager!</string>
     <string name="dashboard_overview">Overview</string>
     <string name="quick_actions">Quick Actions</string>
+    
+    <!-- Dashboard Labels -->
+    <string name="today_sales">Today\'s Sales</string>
+    <string name="orders">Orders</string>
+    <string name="products">Products</string>
+    <string name="low_stock">Low Stock</string>
+    <string name="manage_inventory">Manage Inventory</string>
+    <string name="add_new_product">Add New Product</string>
+    <string name="about_app">About Smart Kirana</string>
+    
+    <!-- Auth Strings -->
+    <string name="login_title">Login to Store</string>
+    <string name="email_hint">Email Address</string>
+    <string name="password_hint">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Create New Account</string>
+    <string name="auth_failed">Authentication Failed</string>
+    <string name="master_bypass_tip">Presentation Tip: Use admin@store.com / admin123</string>
+    
+    <!-- Inventory Strings -->
+    <string name="search_hint">Search products...</string>
+    <string name="no_products">No products found</string>
+    <string name="retry">Retry</string>
+    <string name="save_product">Save Product</string>
+    <string name="cancel">Cancel</string>
 </resources>

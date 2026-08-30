@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,6 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,15 +38,15 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // 1. Force Initialize Firebase
+        // Initialize Firebase safely
         try {
-            FirebaseApp.initializeApp(this);
-            mAuth = FirebaseAuth.getInstance();
-            isFirebaseReady = true;
-            Log.d(TAG, "Firebase Initialized Successfully");
-        } catch (Exception e) {
-            Log.e(TAG, "Firebase Init Error: " + e.getMessage());
-            Toast.makeText(this, "Firebase Connection Error. Check google-services.json", Toast.LENGTH_LONG).show();
+            if (!FirebaseApp.getApps(this).isEmpty()) {
+                mAuth = FirebaseAuth.getInstance();
+                isFirebaseReady = true;
+                Log.d(TAG, "Firebase Ready");
+            }
+        } catch (Throwable t) {
+            Log.e(TAG, "Firebase Init Error: " + t.getMessage());
         }
 
         etEmail = findViewById(R.id.etEmail);
@@ -55,35 +55,27 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         pbLoading = findViewById(R.id.pbLoading);
 
-        // LOGIN BUTTON
-        if (btnLogin != null) {
-            btnLogin.setOnClickListener(v -> handleAuth(true));
-        }
-
-        // REGISTER BUTTON
-        if (btnRegister != null) {
-            btnRegister.setOnClickListener(v -> handleAuth(false));
-        }
+        // Button Listeners
+        if (btnLogin != null) btnLogin.setOnClickListener(v -> handleAuth(true));
+        if (btnRegister != null) btnRegister.setOnClickListener(v -> handleAuth(false));
     }
 
     private void handleAuth(boolean isLogin) {
         String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
         String password = etPassword.getText() != null ? etPassword.getText().toString().trim() : "";
 
-        // 1. Validation
-        if (TextUtils.isEmpty(email) || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etEmail.setError("Enter a valid email (e.g. name@mail.com)");
-            Toast.makeText(this, "Invalid Email Format", Toast.LENGTH_SHORT).show();
+        // VALIDATION
+        if (TextUtils.isEmpty(email)) {
+            etEmail.setError(getString(R.string.email_hint));
             return;
         }
-
         if (password.length() < 6) {
-            etPassword.setError("Password must be at least 6 characters");
-            Toast.makeText(this, "Password too short! Use 6+ characters.", Toast.LENGTH_SHORT).show();
+            etPassword.setError(getString(R.string.password_hint));
+            Toast.makeText(this, "Password must be 6+ characters.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // MASTER BYPASS (Always works for presentation)
+        // MASTER BYPASS
         if (email.equals("admin@store.com") && password.equals("admin123")) {
             navigateToMain();
             return;
@@ -104,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                 mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(this, "Registration Successful! Account Created.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, "Account Created Successfully!", Toast.LENGTH_LONG).show();
                             navigateToMain();
                         } else {
                             handleFailure(task.getException(), "Registration");
@@ -113,26 +105,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         } else {
             // DEMO FALLBACK
-            Toast.makeText(this, "Demo Mode Access", Toast.LENGTH_SHORT).show();
-            pbLoading.postDelayed(this::navigateToMain, 800);
+            pbLoading.postDelayed(this::navigateToMain, 1000);
         }
     }
 
     private void handleFailure(Exception e, String type) {
         if (pbLoading != null) pbLoading.setVisibility(View.GONE);
         setButtonsEnabled(true);
+        String errorMsg = e != null ? e.getMessage() : getString(R.string.auth_failed);
         
-        String errorMsg = e != null ? e.getMessage() : "Unknown Connection Error";
         Log.e(TAG, type + " Error: " + errorMsg);
 
         if (e instanceof FirebaseAuthUserCollisionException) {
-            Toast.makeText(this, "Email already exists! Please Login instead.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "This email is already registered. Please Login.", Toast.LENGTH_LONG).show();
         } else if (e instanceof FirebaseAuthWeakPasswordException) {
             Toast.makeText(this, "Password is too weak!", Toast.LENGTH_SHORT).show();
-        } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
-            Toast.makeText(this, "Invalid credentials. Check your email/password.", Toast.LENGTH_LONG).show();
         } else if (errorMsg.contains("disabled")) {
-            Toast.makeText(this, "CRITICAL: Email Login is DISABLED in Firebase. Go to Auth -> Sign-in Method and Enable it.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ERROR: Enable 'Email/Password' in Firebase Auth Console!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, type + " Failed: " + errorMsg, Toast.LENGTH_LONG).show();
         }

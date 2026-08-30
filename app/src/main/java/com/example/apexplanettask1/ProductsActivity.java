@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,49 +90,48 @@ public class ProductsActivity extends AppCompatActivity {
                         adapter.updateList(productList);
                         showData();
                     } else {
-                        // This is an empty state, not a server error
-                        showEmptyState("Your store is empty. Add your first product!");
+                        showEmptyState(getString(R.string.no_products));
                     }
                 } else {
-                    showError("Server responded with error: " + response.code() + ". Check your Firebase URL and Rules.");
+                    showError(getString(R.string.auth_failed) + ": " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Map<String, Product>> call, @NonNull Throwable t) {
                 hideLoading();
-                showError("Unable to connect to server. Ensure your Firebase URL in RetrofitClient is correct.");
+                showError(getString(R.string.retry) + ": " + t.getLocalizedMessage());
                 Log.e(TAG, "Network Error: " + t.getMessage());
             }
         });
     }
 
     private void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
-        rvProducts.setVisibility(View.GONE);
-        errorLayout.setVisibility(View.GONE);
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+        if (rvProducts != null) rvProducts.setVisibility(View.GONE);
+        if (errorLayout != null) errorLayout.setVisibility(View.GONE);
     }
 
     private void hideLoading() {
-        progressBar.setVisibility(View.GONE);
+        if (progressBar != null) progressBar.setVisibility(View.GONE);
     }
 
     private void showData() {
-        rvProducts.setVisibility(View.VISIBLE);
-        errorLayout.setVisibility(View.GONE);
+        if (rvProducts != null) rvProducts.setVisibility(View.VISIBLE);
+        if (errorLayout != null) errorLayout.setVisibility(View.GONE);
     }
 
     private void showEmptyState(String message) {
-        rvProducts.setVisibility(View.GONE);
-        errorLayout.setVisibility(View.VISIBLE);
-        tvError.setText(message);
-        btnRetry.setText("Refresh");
+        if (rvProducts != null) rvProducts.setVisibility(View.GONE);
+        if (errorLayout != null) errorLayout.setVisibility(View.VISIBLE);
+        if (tvError != null) tvError.setText(message);
+        if (btnRetry != null) btnRetry.setText(getString(R.string.retry));
     }
 
     private void showError(String message) {
-        rvProducts.setVisibility(View.GONE);
-        errorLayout.setVisibility(View.VISIBLE);
-        tvError.setText(message);
-        btnRetry.setText("Retry");
+        if (rvProducts != null) rvProducts.setVisibility(View.GONE);
+        if (errorLayout != null) errorLayout.setVisibility(View.VISIBLE);
+        if (tvError != null) tvError.setText(message);
+        if (btnRetry != null) btnRetry.setText(getString(R.string.retry));
     }
 }

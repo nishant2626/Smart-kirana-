@@ -45,32 +45,17 @@ public class AddProductActivity extends AppCompatActivity {
         Button btnCancel = findViewById(R.id.btnCancel);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Saving product to cloud...");
+        progressDialog.setMessage(getString(R.string.save_product) + "...");
         progressDialog.setCancelable(false);
 
         // Save Button Click
-        btnSaveProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveProduct();
-            }
-        });
+        btnSaveProduct.setOnClickListener(v -> saveProduct());
 
         // Cancel Button Click
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnCancel.setOnClickListener(v -> finish());
         
         // Toolbar back button
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void saveProduct() {
@@ -82,31 +67,23 @@ public class AddProductActivity extends AppCompatActivity {
         String stockStr = etStock.getText().toString().trim();
         String category = etCategory.getText().toString().trim();
 
-        if (name.isEmpty() || priceStr.isEmpty() || stockStr.isEmpty() || category.isEmpty()) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        if (!ValidationUtils.isValidProduct(name, priceStr, stockStr)) {
+            Toast.makeText(this, "Please check your product details.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        double price;
-        int stock;
-        try {
-            price = Double.parseDouble(priceStr);
-            stock = Integer.parseInt(stockStr);
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Invalid price or stock format", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        double price = Double.parseDouble(priceStr);
+        int stock = Integer.parseInt(stockStr);
 
-        Product product = new Product(name, price, stock, category, "Smart Kirana Product");
+        Product product = new Product(name, price, stock, category, "Smart Kirana Inventory Item");
 
-        // Task 3: Backend POST Integration
         progressDialog.show();
         Log.d(TAG, "Starting POST request to save product: " + name);
         
         RetrofitClient.getApiService().addProduct(product).enqueue(new Callback<Map<String, String>>() {
             @Override
             public void onResponse(@NonNull Call<Map<String, String>> call, @NonNull Response<Map<String, String>> response) {
-                progressDialog.dismiss();
+                if (progressDialog.isShowing()) progressDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d(TAG, "Product saved successfully. Firebase ID: " + response.body().get("name"));
                     Toast.makeText(AddProductActivity.this, "Product saved successfully!", Toast.LENGTH_SHORT).show();
@@ -119,7 +96,7 @@ public class AddProductActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<Map<String, String>> call, @NonNull Throwable t) {
-                progressDialog.dismiss();
+                if (progressDialog.isShowing()) progressDialog.dismiss();
                 Log.e(TAG, "Network failure: " + t.getMessage());
                 Toast.makeText(AddProductActivity.this, "Network error! Check your connection.", Toast.LENGTH_SHORT).show();
             }

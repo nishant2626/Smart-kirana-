@@ -1,42 +1,62 @@
-# Smart Kirana — ApexPlanet Task 2
+# Smart-Kirana
 
-## Project Description
-**Smart Kirana** is a premium business management application designed for local Indian shopkeepers. It provides a simple, modern, and professional interface to manage inventory, track sales, and oversee store operations.
-
-## Internship Details
-- **Company:** ApexPlanet Software Pvt. Ltd.
-- **Task:** Task 2 — UI/UX Design and Implementation
-
-## UI/UX Improvements (Task 2)
-- **Modern Dashboard:** A clean overview screen showing key business metrics (Sales, Orders, Stock) using high-contrast Material 3 cards.
-- **Visual Design System:** Implemented a consistent palette of deep slate and modern blue, with standardized spacing and typography.
-- **Responsive Layouts:** Utilized `ConstraintLayout`, `GridLayout`, and `NestedScrollView` to ensure the app works across all screen sizes.
-- **Optimized Navigation:** Intuitive flow between Home, Inventory, and Product Management using a Floating Action Button (FAB) and clear button hierarchy.
-- **Inventory Management:** A scan-friendly product list with status indicators (e.g., Low Stock alerts).
-- **Material 3 Components:** Integrated `MaterialButton`, `TextInputLayout` with floating labels, and `MaterialCardView` for a premium feel.
-
-## Technologies Used
-- **Language:** Java
-- **Design:** XML, Material Design 3
-- **Tools:** Android Studio, Gradle
+## Overview
+**Smart-Kirana** is a professional, cloud-integrated Android application designed to empower local Indian shopkeepers. It provides a digital command center for managing inventory, tracking stock levels in real-time, and receiving automated alerts for low-stock items. Developed as the final project for the **ApexPlanet Software Pvt. Ltd. Android App Development Internship**, this app bridges the gap between traditional retail and modern digital efficiency.
 
 ## Features
-- **Dashboard Overview:** Real-time metrics visualization.
-- **Inventory List:** Searchable product view with category and stock status.
-- **Add Product Form:** Professional input validation-ready form.
-- **About Section:** Polished branding and developer information.
+- **Secure Authentication**: Manager-only access using Firebase Authentication (Login & Registration).
+- **Executive Dashboard**: Real-time visualization of store health (Total Items, Low Stock counts).
+- **Live Inventory**: Dynamic product listing with search functionality and real-time cloud sync.
+- **Automated Alerts**: System-level Android notifications triggered when stock falls below 5 units.
+- **Modern UI/UX**: Premium Material 3 design system with responsive layouts for all device sizes.
+- **Offline Reliability**: Graceful error handling and a "Demo Mode" fallback for connectivity issues.
 
-## How to Run
-1. Open the project in **Android Studio**.
-2. Sync the project with Gradle.
-3. Run on an emulator or physical device.
-4. Use the Dashboard buttons to navigate through the app.
+## Technology Stack
+- **Language**: Java
+- **Networking**: Retrofit 2, OkHttp 3 (with Logging Interceptor), Gson
+- **Backend**: Firebase Authentication, Firebase Realtime Database (via REST API)
+- **UI Architecture**: Material Design 3, Fragments, RecyclerView
+- **Testing**: JUnit 4, Espresso
+- **CI/CD**: GitHub Actions
 
-## Testing Checklist
-- [x] Home dashboard displays overview cards.
-- [x] "Manage Inventory" button opens the product list.
-- [x] "Add New Product" FAB/Button opens the form.
-- [x] Form validation (toast message) works on save.
-- [x] About screen displays professional branding.
-- [x] Toolbar back buttons function correctly on all screens.
-- [x] Layout remains responsive on different screen densities.
+## Architecture
+The project utilizes a **Layered Architecture**:
+- **Presentation Layer**: Activities/Fragments for UI logic.
+- **Domain Layer**: `Product` model and `ValidationUtils` for business rules.
+- **Data Layer**: `RetrofitClient` and `ApiService` for external communication.
+- **Helper Layer**: `NotificationHelper` for OS integration.
+
+## Project Structure
+- `com.example.apexplanettask1`: Root package containing all Java logic.
+- `res/layout`: XML definitions for Activities, Fragments, and List Items.
+- `res/values`: Design tokens including Colors, Strings, and Dimensions.
+- `androidTest` & `test`: Comprehensive testing suites.
+
+## Backend & Authentication Setup
+1. **Firebase Integration**: Requires `google-services.json` in the `app/` folder.
+2. **REST API**: Configure the `BASE_URL` in `RetrofitClient.java` to point to your Firebase RTDB.
+3. **Auth**: Enable **Email/Password** sign-in method in the Firebase Console.
+
+## Running the Project
+1. Clone the repo: `git clone https://github.com/nishant2626/Smart-kirana-.git`
+2. Open in **Android Studio**.
+3. Sync Gradle and run on an emulator or physical device.
+4. **Demo Access**: Use `admin@store.com` / `admin123` for instant entry.
+
+## Testing
+- **Automated**: Run `./gradlew test` and `./gradlew connectedAndroidTest`.
+- **Manual**: Refer to `TESTING.md` for the full QA checklist.
+
+## Release
+- **Target SDK**: 34 (Android 14)
+- **Build**: Generate signed APK/AAB via the `Build` menu in Android Studio.
+
+## Future Improvements
+- Barcode scanning integration.
+- PDF generation for sales reports.
+- Multi-user roles (Owner vs. Staff).
+
+## Author
+**Nishant**
+GitHub: [nishant2626](https://github.com/nishant2626)
+Project: [Smart-Kirana](https://github.com/nishant2626/Smart-kirana-)
